@@ -1,0 +1,19 @@
+{
+  "name": "basic_nodejs_project_setup_practice_2",
+  "version": "1.0.0",
+  "description": "Practice 2",
+  "main": "index.js",
+  "scripts": {
+    
+  },
+  "author": "Partho",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "http-status-codes": "^2.3.0",
+    "mysql2": "^3.10.2",
+    "sequelize": "^6.37.3",
+    "sequelize-cli": "^6.6.2"
+  }
+}
