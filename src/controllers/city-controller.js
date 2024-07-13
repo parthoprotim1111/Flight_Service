@@ -1,5 +1,4 @@
-
-const {AirplaneService}= require('../services');
+const {CityService}= require('../services');
 
 const {successRes, errorRes}= require('../utils/common');
 const {StatusCodes}= require('http-status-codes');
@@ -7,15 +6,15 @@ const {StatusCodes}= require('http-status-codes');
 
 
 
-async function createAirplane(req,res){
+async function createCity(req,res){
     try {
-        const airplane= await AirplaneService.createAirplane({
-            airplaneName: req.body.airplaneName,
-            airplaneNo: req.body.airplaneNo,
-            capacity: req.body.capacity
+        const city= await CityService.createCity({
+            name: req.body.name,
+            cityCode: req.body.cityCode
+            
         });
 
-        successRes.data=airplane;
+        successRes.data=city;
         return res
         .status(StatusCodes.CREATED)
         .json(successRes)
@@ -29,10 +28,10 @@ async function createAirplane(req,res){
     }
 }
 
-async function getAirplanes(req,res){
+async function getCities(req,res){
     try {
-        const airplane= await AirplaneService.getAirplanes();
-        successRes.data=airplane;
+        const city= await CityService.getCities();
+        successRes.data=city;
         return res
         .status(StatusCodes.OK)
         .json(successRes)
@@ -46,11 +45,11 @@ async function getAirplanes(req,res){
     }
 }
 
-async function getAirplane(req,res){
+async function getCity(req,res){
     try {
 
-        const airplane= await AirplaneService.getAirplane(req.params.id);
-        successRes.data=airplane;
+        const city= await CityService.getCity(req.params.id);
+        successRes.data=city;
         return res
         .status(StatusCodes.OK)
         .json(successRes)
@@ -60,24 +59,22 @@ async function getAirplane(req,res){
         return res
         .status(error.statusCode)
         .json(errorRes);
-        
-        
+         
     }
 
 }
 
 
-async function deleteAirplane(req,res){
+async function deleteCity(req,res){
     try {
 
-        const airplane= await AirplaneService.deleteAirplane(req.params.id);
-        successRes.data=airplane;
+        const city= await CityService.deleteCity(req.params.id);
+        successRes.data=city;
         return res
         .status(StatusCodes.OK)
         .json(successRes)
     } catch (error) {
         errorRes.error=error;
-        
         return res
         .status(error.statusCode)
         .json(errorRes);
@@ -87,15 +84,14 @@ async function deleteAirplane(req,res){
 
 }
 
-async function updateAirplane(req,res){
+async function updateCity(req,res){
     try {
-        const airplane= await AirplaneService.updateAirplane(req.params.id,{
-            airplaneName: req.body.airplaneName,
-            airplaneNo: req.body.airplaneNo,
-            capacity: req.body.capacity
+        const city= await CityService.updateCity(req.params.id,{
+            name: req.body.name,
+            cityCode: req.body.cityCode
 
         });
-        successRes.data=airplane;
+        successRes.data=city;
         return res
         .status(StatusCodes.OK)
         .json(successRes)
@@ -111,10 +107,10 @@ async function updateAirplane(req,res){
 
 
 
-module.exports= {
-    createAirplane,
-    getAirplanes,
-    getAirplane,
-    deleteAirplane,
-    updateAirplane
-};
+module.exports={
+    createCity,
+    getCities,
+    getCity,
+    deleteCity,
+    updateCity
+}

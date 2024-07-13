@@ -1,4 +1,5 @@
 module.exports={
     infoController: require('./info-controller'),
-    createAirplaneController: require('./airplane-controller')
+    createAirplaneController: require('./airplane-controller'),
+    createCityController: require('./city-controller')
 }
