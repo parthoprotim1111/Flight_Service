@@ -29,4 +29,25 @@ async function createAirplane(req,res){
     }
 }
 
-module.exports= {createAirplane};
+async function getAirplanes(req,res){
+    try {
+        const airplane= await AirplaneService.getAirplanes();
+        successRes.data=airplane;
+        return res
+        .status(StatusCodes.OK)
+        .json(successRes)
+    } catch (error) {
+        errorRes.error=error;
+        
+        return res
+        .status(error.statusCode)
+        .json(errorRes);
+        
+    }
+}
+
+
+
+module.exports= {createAirplane,
+    getAirplanes
+};
