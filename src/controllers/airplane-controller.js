@@ -70,7 +70,31 @@ async function getAirplane(req,res){
 async function deleteAirplane(req,res){
     try {
 
-        const airplane= await AirplaneService.deleteAirplane(req.params.id);
+        const airplane= await AirplaneService.deleteAirplane(req.params.id,{
+            airplaneName: req.body.airplaneName,
+            airplaneNo: req.body.airplaneNo,
+            capacity: req.body.capacity
+        });
+        successRes.data=airplane;
+        return res
+        .status(StatusCodes.OK)
+        .json(successRes)
+    } catch (error) {
+        errorRes.error=error;
+        return res
+        .status(error.statusCode)
+        .json(errorRes);
+        
+        
+    }
+
+}
+
+async function updateAirplane(req,res){
+    try {
+        const airplane= await AirplaneService.updateAirplane(req.params.id,{
+
+        });
         successRes.data=airplane;
         return res
         .status(StatusCodes.OK)
@@ -82,9 +106,7 @@ async function deleteAirplane(req,res){
         .status(error.statusCode)
         .json(errorRes);
         
-        
     }
-
 }
 
 
@@ -93,5 +115,6 @@ module.exports= {
     createAirplane,
     getAirplanes,
     getAirplane,
-    deleteAirplane
+    deleteAirplane,
+    updateAirplane
 };
