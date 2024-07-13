@@ -13,41 +13,41 @@ class crudRepository{
     }
 
     async destroy(data){
-        try {
+       
             const response= await this.model.destroy({
                 where:{
                     id:data
                 }
             });
             return response;
-        } catch (error) {
-            throw error;
-            
-        }
+        
     }
 
     async get(data){
-        try {
+        
             const response= await this.model.findByPk({
                 where:{
                     id:data
                 }
             });
             return response;
-        } catch (error) {
-            throw error;
-            
-        }
+        
     }
 
     async getAll(){
-        try {
+        
             const response= await this.model.findAll();
             return response;
-        } catch (error) {
-            throw error;
-            
-        }
+        
+    }
+
+    async update(data){
+        const response= await this.model.update(data, {
+            where:{
+                id:id
+            }
+        })
+        return response;
     }
 }
 
