@@ -9,13 +9,14 @@ async function createCity(data) {
         const city = await City.create(data);
         return city;
     } catch (error) {
-        if (error.name === 'SequelizeValidationError') {
+        
+        if (error.name == 'SequelizeValidationError' || error.name== 'SequelizeUniqueConstraintError') {
             let explanation = [];
             error.errors.forEach((err) => {
                 explanation.push(err.message);
             });
 
-            throw new AppError("Cannot create a new City object", StatusCodes.BAD_REQUEST);
+            throw new AppError(explanation, StatusCodes.BAD_REQUEST);
         }
         throw new AppError("Cannot create a new City object", StatusCodes.INTERNAL_SERVER_ERROR);
     }
@@ -58,17 +59,26 @@ async function deleteCity(id) {
 
 
 
-async function updateCity(id, data){
+async function updateCity(id, data) {
     try {
         const city = await City.update(id, data);
         return city;
     } catch(error) {
-        if(error.statusCode == StatusCodes.NOT_FOUND) {
-            throw new AppError("The city you requested to update is not present", error.statusCode);
-        }
-        throw new AppError("Cannot fetch data of the required city", StatusCodes.NOT_FOUND);
-    }
 
+        if(error.name == 'SequelizeValidationError' || error.name == 'SequelizeUniqueConstraintError') {
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+            throw new AppError(explanation, StatusCodes.BAD_REQUEST);
+        }
+        else if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('The City you requested to update is not present', error.statusCode);
+        }
+
+        throw new AppError('Cannot update the city object', StatusCodes.INTERNAL_SERVER_ERROR);
+
+    }
 }
 
 module.exports={

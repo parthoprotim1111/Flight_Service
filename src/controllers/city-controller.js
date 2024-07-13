@@ -84,24 +84,21 @@ async function deleteCity(req,res){
 
 }
 
-async function updateCity(req,res){
+async function updateCity(req, res) {
     try {
-        const city= await CityService.updateCity(req.params.id,{
+        const city = await CityService.updateCity(req.params.id, {
             name: req.body.name,
             cityCode: req.body.cityCode
-
         });
-        successRes.data=city;
+        successRes.data = city;
         return res
-        .status(StatusCodes.OK)
-        .json(successRes)
-    } catch (error) {
-        errorRes.error=error;
-        
+                .status(StatusCodes.CREATED)
+                .json(successRes);
+    } catch(error) {
+        errorRes.error = error;
         return res
-        .status(error.statusCode)
-        .json(errorRes);
-        
+                .status(error.statusCode)
+                .json(errorRes);
     }
 }
 
