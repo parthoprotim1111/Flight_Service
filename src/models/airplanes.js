@@ -11,11 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Airplanes.hasMany(models.flights, { foreignKey: 'flightName'});
     }
   }
   Airplanes.init({
     airplaneName: DataTypes.STRING,
-    airplaneNo: DataTypes.STRING,
+    airplaneNo:{
+      type: DataTypes.STRING,
+      unique: true
+    },
     capacity: {
       type:DataTypes.INTEGER,
       allowNull:false,

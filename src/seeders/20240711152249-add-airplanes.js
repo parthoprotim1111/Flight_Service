@@ -30,7 +30,14 @@ module.exports = {
         capacity: 120,
         createdAt: new Date(),
         updatedAt: new Date()
-      }
+      },
+      {
+        airplaneName: 'Indigo',
+        airplaneNo: "Indi767",
+        capacity: 220,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
 
 
     ])
@@ -45,6 +52,6 @@ module.exports = {
      */
 
 
-    await queryInterface.bulkDelete('Airplanes',{[Op.or]: [{airplaneNo:'cz230'}, {airplaneNo: 'Indi45'}] } )
+    await queryInterface.bulkDelete('Airplanes',{[Op.or]: [{airplaneNo:'cz230'}, {airplaneNo: 'Indi45'},{airplaneNo: 'Indi767'}] } )
   }
 };
