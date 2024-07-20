@@ -9,24 +9,57 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      flightName: {
+      flightNumber: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      airplaneId: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        references:{
+          model: 'Airplanes',
+          key: 'airplaneNo'
+
+        },
+        onDelete: 'CASCADE'
+
       },
-      Departure: {
+      departureAirportId: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        references:{
+          model: 'Airports',
+          key: 'code'
+
+        },
+        onDelete: 'CASCADE'
       },
-      Arrival: {
+      arrivalAirportId: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        references:{
+          model: 'Airports',
+          key: 'code'
+
+        },
+        onDelete: 'CASCADE'
       },
-      Date: {
+      arrivalTime: {
         type: Sequelize.DATE,
         allowNull: false
       },
-
+      departureTime: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      price: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      totalSeats: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
