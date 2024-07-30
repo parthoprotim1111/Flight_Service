@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('flights', {
+    await queryInterface.createTable('Flights', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -14,35 +14,31 @@ module.exports = {
         allowNull: false
       },
       airplaneId: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
         allowNull: false,
-        references:{
+        references: {
           model: 'Airplanes',
-          key: 'airplaneNo'
-
+          key: 'id'
         },
-        onDelete: 'CASCADE'
-
+        onDelete: 'CASCADE',
       },
       departureAirportId: {
         type: Sequelize.STRING,
         allowNull: false,
-        references:{
+        references: {
           model: 'Airports',
           key: 'code'
-
         },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       arrivalAirportId: {
         type: Sequelize.STRING,
         allowNull: false,
-        references:{
+        references: {
           model: 'Airports',
           key: 'code'
-
         },
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       arrivalTime: {
         type: Sequelize.DATE,
@@ -56,7 +52,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      totalSeats: {
+      availabeSeats: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
@@ -71,6 +67,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('flights');
+    await queryInterface.dropTable('Flights');
   }
 };

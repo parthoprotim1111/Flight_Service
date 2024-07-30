@@ -9,15 +9,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      airplaneName: {
-        type: Sequelize.STRING
-      },
-      airplaneNo: {
+     modelNumber: {
         type: Sequelize.STRING,
-        unique: true
+        allowNull: false,
       },
       capacity: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        validate: {
+          max: 1000
+        }
       },
       createdAt: {
         allowNull: false,

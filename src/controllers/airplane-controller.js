@@ -10,8 +10,7 @@ const {StatusCodes}= require('http-status-codes');
 async function createAirplane(req,res){
     try {
         const airplane= await AirplaneService.createAirplane({
-            airplaneName: req.body.airplaneName,
-            airplaneNo: req.body.airplaneNo,
+            modelNumber: req.body.modelNumber,
             capacity: req.body.capacity
         });
 
@@ -90,10 +89,8 @@ async function deleteAirplane(req,res){
 async function updateAirplane(req,res){
     try {
         const airplane= await AirplaneService.updateAirplane(req.params.id,{
-            airplaneName: req.body.airplaneName,
-            airplaneNo: req.body.airplaneNo,
+            modelNumber: req.body.modelNumber,
             capacity: req.body.capacity
-
         });
         successRes.data=airplane;
         return res

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class flights extends Model {
+  class Flights extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,67 +12,56 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.Airplanes,{
-        foreignKey: 'airplaneId'
+        foreignKey: 'airplaneId',
+        as: 'airplaneDetail'
       });
-
       this.belongsTo(models.Airports,{
-        foreignKey: 'departureAirportId'
+        foreignKey: 'departureAirportId',
+        as: 'departureAirport'
       });
-
       this.belongsTo(models.Airports,{
-        foreignKey: 'arrivalAirportId'
+        foreignKey: 'arrivalAirportId',
+        as: 'arrivalAirport'
+
       })
-
     }
   }
-
-  
-  flights.init({
+  Flights.init({
     flightNumber: {
       type: DataTypes.STRING,
       allowNull: false
-    
     },
     airplaneId: {
-      type: DataTypes.STRING,
-      allowNull: false
-    
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     departureAirportId: {
       type: DataTypes.STRING,
       allowNull: false
-    
     },
     arrivalAirportId: {
       type: DataTypes.STRING,
       allowNull: false
-    
     },
     arrivalTime: {
       type: DataTypes.DATE,
       allowNull: false
-      
-
-    
     },
     departureTime: {
       type: DataTypes.DATE,
       allowNull: false
-    
     },
     price: {
       type: DataTypes.INTEGER,
       allowNull: false
-    
     },
-    totalSeats: {
-      type: DataTypes.INTEGER,
+    availabeSeats: {
+      type:DataTypes.INTEGER,
       allowNull: false
-    
     }
   }, {
     sequelize,
-    modelName: 'flights',
+    modelName: 'Flights',
   });
-  return flights;
+  return Flights;
 };

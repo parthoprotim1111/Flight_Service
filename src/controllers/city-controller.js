@@ -9,8 +9,7 @@ const {StatusCodes}= require('http-status-codes');
 async function createCity(req,res){
     try {
         const city= await CityService.createCity({
-            name: req.body.name,
-            cityCode: req.body.cityCode
+            name: req.body.name
             
         });
 

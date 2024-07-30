@@ -17,7 +17,7 @@ async function createFlight(req,res){
             arrivalTime: req.body.arrivalTime,
             departureTime: req.body.departureTime,
             price: req.body.price,
-            totalSeats: req.body.totalSeats
+            availabeSeats: req.body.availabeSeats
         });
 
         successRes.data=flight;

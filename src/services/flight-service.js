@@ -31,6 +31,7 @@ async function getAllFlights(query){
         [departureAirportId,arrivalAirportId]=query.trips.split('-');
         customFilter.departureAirportId=departureAirportId;
         customFilter.arrivalAirportId=arrivalAirportId;
+        console.log(customFilter)
     }
 
     if(query.price){
@@ -56,10 +57,11 @@ async function getAllFlights(query){
         sortFilter=sortFilters
     }
 
+    console.log(customFilter,sortFilter)
 
 
     try {
-        const flights= await Flights.getAllFlights(customFilter, sortFilter)
+        const flights= await Flights.getAllFlights(customFilter,sortFilter)
         return flights;
         
     } catch (error) {

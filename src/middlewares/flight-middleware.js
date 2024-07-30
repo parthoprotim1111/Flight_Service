@@ -62,7 +62,7 @@ function validateCreateRequest(req,res,next){
         .json(errorRes)
     }
 
-    if(!req.body.totalSeats){
+    if(!req.body.availabeSeats){
         errorRes.message= 'Something went wrong while creating the flight';
         errorRes.error= new AppError(["Seats not found in the incoming request in the correct format"],StatusCodes.BAD_REQUEST)
         return res
