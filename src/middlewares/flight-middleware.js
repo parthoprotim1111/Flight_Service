@@ -85,7 +85,24 @@ function validateCreateRequest(req,res,next){
     next()
 }
 
+function validateUpdateSeat(req,res,next){
+
+    if(!req.body.seats){
+        errorRes.message= 'Something went wrong while updating the seats';
+        errorRes.error= new AppError(["Seat not found"],StatusCodes.BAD_REQUEST)
+        return res
+        .status(StatusCodes.BAD_REQUEST)
+        .json(errorRes)
+
+    }
+
+    next()
+
+
+}
+
 
 module.exports= {
-    validateCreateRequest
+    validateCreateRequest,
+    validateUpdateSeat
 }
