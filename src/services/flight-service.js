@@ -57,22 +57,44 @@ async function getAllFlights(query){
         sortFilter=sortFilters
     }
 
-    console.log(customFilter,sortFilter)
-
-
     try {
         const flights= await Flights.getAllFlights(customFilter,sortFilter)
         return flights;
         
-    } catch (error) {
-        throw new AppError('Cannot fetch data of all the flights', StatusCodes.INTERNAL_SERVER_ERROR)
-        
+    }  catch (error) {
+        if (error.name === 'SequelizeValidationError') {
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+
+            throw new AppError(explanation, StatusCodes.BAD_REQUEST);
+        }
+        throw new AppError("Cannot get the Flights", StatusCodes.INTERNAL_SERVER_ERROR);
     }
 
+}
+
+async function getFlight(id){
+    try {
+        const flight= await Flights.get(id);
+        return flight;
+    } catch (error) {
+        if (error.name === 'SequelizeValidationError') {
+            let explanation = [];
+            error.errors.forEach((err) => {
+                explanation.push(err.message);
+            });
+
+            throw new AppError(explanation, StatusCodes.BAD_REQUEST);
+        }
+        throw new AppError("Cannot get the Flight", StatusCodes.INTERNAL_SERVER_ERROR);
+    }
 }
 
 
 module.exports = {
     createFlight,
-    getAllFlights
+    getAllFlights,
+    getFlight
 };
